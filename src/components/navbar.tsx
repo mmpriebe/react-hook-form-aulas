@@ -1,5 +1,6 @@
 import React from 'react';
 import './navbar.css';
+import { Activity } from 'react-bootstrap-icons';
 
 const Navbar: React.FC = () => {
     return (
@@ -13,7 +14,7 @@ const Navbar: React.FC = () => {
             }}
         >
             <div style={{ fontSize: '1.25rem', fontWeight: 700 }}>
-                <a href="/">Meu App</a>
+                <a href="/"><Activity size={28}/></a>
             </div>
             <div style={{ display: 'flex', gap: '1.5rem' }}>
                 <a id="inicio" href="/">

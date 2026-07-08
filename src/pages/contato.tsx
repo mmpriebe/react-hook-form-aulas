@@ -1,7 +1,8 @@
 import Navbar from "../components/navbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import Toast from "../components/toast";
+import { Calendar2EventFill } from "react-bootstrap-icons";
 
 interface FormImput {
     nome: string;
@@ -11,16 +12,23 @@ interface FormImput {
 }
 
 export default function Contato() {
-    const { register, handleSubmit, formState: { errors } } = useForm<FormImput>();
+    const { register, handleSubmit, reset, formState, formState: { errors } } = useForm<FormImput>();
     const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
     function onSubmit(dados: FormImput) {
         console.log(dados);
 
         setTimeout(() => {
-            setToast({ message: "Cadastro realizado com sucesso✅", type: "success" });
+            setToast({ message: "Contato enviado com sucesso✅", type: "success" });
         }, 1000);
     }
+
+    useEffect(() => {
+        if (formState.isSubmitSuccessful) {
+            reset()
+        }
+    })
+
     console.log(errors);
     return (
         <>
@@ -29,7 +37,9 @@ export default function Contato() {
             <div><h3>Formulário de Contato</h3></div>
 
             <div className="flex1">
-                <div><h3>1. Dados Pessoais</h3></div>
+                <div>
+                    <h3 className="align-center"><Calendar2EventFill size={16}/> Dados Pessoais</h3>
+                </div>
                 <div>
                     <form onSubmit={handleSubmit(onSubmit)}>
 
